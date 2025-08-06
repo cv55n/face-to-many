@@ -194,7 +194,7 @@ class ComfyUI:
 
         if http_error:
             raise Exception(
-                "erro comfyui - seu workflow não pôde ser executado. isso geralmente acontece quando você tenta usar um node não suportado. verifique os logs para obter detalhes sobre "KeyError:" e acesse https://github.com/fofr/cog-comfyui para ver a lista de nodes personalizados suportados."
+                "erro comfyui - seu workflow não pôde ser executado. isso geralmente acontece quando você tenta usar um node não suportado. verifique os logs para obter detalhes sobre 'keyerror:' e acesse https://github.com/fofr/cog-comfyui para ver a lista de nodes personalizados suportados."
             )
         
     def wait_for_prompt_completion(self, workflow, prompt_id):
