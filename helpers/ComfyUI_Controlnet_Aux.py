@@ -107,7 +107,7 @@ class ComfyUI_Controlnet_Aux:
             else:
                 weights_to_download.append(class_weights)
 
-        # Additional check for AIO_Preprocessor and its preprocessor input value
+        # verificação adicional para aio_preprocessor e seu valor de entrada do pré-processador
         if node_class == "AIO_Preprocessor" and "preprocessor" in node.get("inputs", {}):
             preprocessor = node["inputs"]["preprocessor"]
 
