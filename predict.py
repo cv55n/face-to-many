@@ -25,3 +25,27 @@ LORA_WEIGHTS_MAPPING = {
 }
 
 LORA_TYPES = list(LORA_WEIGHTS_MAPPING.keys())
+
+class Predictor(BasePredictor):
+    def setup(self):
+        self.comfyui = ComfyUI("127.0.0.1:8188")
+        self.comfyUI.start_server(OUTPUT_DIR, INPUT_DIR)
+        self.comfyUI.load_workflow(workflow_json, check_inputs=False)
+        self.download_loras()
+
+    def parse_custom_lora_url(self, url: str):
+        if "pbxt.replicate" in url:
+            parts_after_pbxt = url.split("/pbxt.replicate.delivery/")[1]
+        else:
+            parts_after_pbxt = url.split("/pbxt/")[1]
+
+        return parts_after_pbxt.split("/trained_model.tar")[0]
+    
+    def add_to_lora_map(self, lora_url: str):
+        uuid = self.parse_custom_lora_url(lora_url)
+
+        self.comfyUI.weights_downloader.download_lora_from_replicate_url(uuid, lora_url)
+
+    def download_loras(self):
+        for weight in LORA_WEIGHTS_MAPPING.values():
+            self.comfyUI.weights_downloader.download_weights(weight)

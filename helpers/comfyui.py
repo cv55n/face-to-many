@@ -12,7 +12,7 @@ import websocket
 import random
 from urllib.error import URLError
 
-from weights_downloader import WeightsDownloader
+from weights_manifest import WeightsDownloader
 
 # helpers do custom_nodes
 from helpers.ComfyUI_IPAdapter_plus import ComfyUI_IPAdapter_plus
